@@ -20,6 +20,8 @@ class MasterSlaveRouter(object):
             'write': 'psql_master
     }
 
+    DATABASE_ROUTERS = ['masterslave.MasterSlaveRouter']
+
     If model is not present in MASTER_SLAVE_ROUTING setting, returns
     'default' connection for write and 'slave' connection for read
     """
