@@ -36,11 +36,11 @@ class MasterSlaveRouter(object):
             conf = getattr(settings, 'MASTER_SLAVE_ROUTING', {})
 
             app_label = model._meta.app_label
-            module_name = model._meta.module_name
-            module_label = '%s.%s' % (app_label, module_name)
+            model_name = model._meta.model_name
+            model_label = '%s.%s' % (app_label, model_name)
 
-            if module_label in conf:
-                result = conf[module_label]
+            if model_label in conf:
+                result = conf[model_label]
             elif app_label in conf:
                 result = conf[app_label]
             else:
