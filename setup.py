@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='django_master_slave',
-    version='1.0',
+    version='2.0',
     packages=['masterslave'],
     url='',
     license='Beer Licence',
