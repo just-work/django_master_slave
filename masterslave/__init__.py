@@ -32,12 +32,12 @@ class MasterSlaveRouter(object):
 
     def get_db_config(self, model):
         """ Returns the database configuration for `model`."""
-        if model not in self._lookup_cache:
-            conf = getattr(settings, 'MASTER_SLAVE_ROUTING', {})
+        app_label = model._meta.app_label
+        model_name = model._meta.model_name
+        model_label = '%s.%s' % (app_label, model_name)
 
-            app_label = model._meta.app_label
-            model_name = model._meta.model_name
-            model_label = '%s.%s' % (app_label, model_name)
+        if model_label not in self._lookup_cache:
+            conf = getattr(settings, 'MASTER_SLAVE_ROUTING', {})
 
             if model_label in conf:
                 result = conf[model_label]
@@ -45,8 +45,8 @@ class MasterSlaveRouter(object):
                 result = conf[app_label]
             else:
                 result = {}
-            self._lookup_cache[model] = result
-        return self._lookup_cache[model]
+            self._lookup_cache[model_label] = result
+        return self._lookup_cache[model_label]
 
     def db_for_read(self, model, **hints):
         db_config = self.get_db_config(model)
