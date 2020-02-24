@@ -10,5 +10,4 @@ setup(
     author_email='zimbler@gmail.com',
     description='''Provides master-slave routing
         and force master context manager for Django'''
-
 )
